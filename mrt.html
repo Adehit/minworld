@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>敏人堂</title>
+	<script src="data.js"></script>
+	<style>
+		body {
+			padding: 24px 48px;
+		}
+
+		nav {
+			padding: 10px 24px;
+			background-color: #fff;
+			box-shadow: 2px 2px 24px #888;
+			border-radius: 12px;
+			width: fit-content;
+		}
+
+		nav ul {
+			display: inline-block;
+			padding: 0;
+			text-align: center;
+			list-style: none;
+		}
+
+		nav ul li {
+			display: inline-block;
+			transition: background-color 0.3s ease;
+		}
+
+		nav ul li:not(:last-child) {
+			margin-right: 24px;
+		}
+
+		nav ul li:hover {
+			background-color: #a9d1ff;
+		}
+
+		nav ul li a {
+			color: #000;
+			text-decoration: none;
+			font-size: 18px;
+		}
+
+		.chars {
+			padding: 24px 0;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, 250px);
+			grid-gap: 48px;
+		}
+
+		.characters {
+			width: 250px;
+			height: 250px;
+			background-color: #fff;
+			border-radius: 12px;
+			box-shadow: 2px 2px 24px #888888;
+			overflow: hidden;
+		}
+
+		.top {
+			height: 50%;
+			width: 100%;
+			background-image: linear-gradient(to bottom, #9ee5ff, #faadff);
+		}
+
+		.bottom {
+			height: 50%;
+			width: 100%;
+			padding: 12px;
+			line-height: 1.8em;
+		}
+
+		.char-name {
+			font-weight: bold;
+			letter-spacing: 0.2em;
+		}
+
+		.char-school-unknown {
+			background-color: #ccc !important;
+		}
+
+		.char-attrib {
+			font-size: 0.8em;
+			padding: 4px;
+			border-radius: 6px;
+			background-color: #a9d1ff;
+			margin: 0 4px;
+		}
+	</style>
+</head>
+
+<body onload="init_mrt()">
+	<nav>
+		<h1 style="display: inline-block;">敏人堂</h1>
+		&emsp;&emsp;&emsp;
+		<ul>
+			<li><a href="myz.html">敏言箴</a></li>
+			<li><a href="">敏人堂</a></li>
+			<li><a href="mtl.html">敏图录</a></li>
+		</ul>
+	</nav>
+	<div class="chars"></div>
+	<script>
+		function init_mrt() {
+			const container = document.querySelector('.chars');
+			for (let i = 0; i < characters.length; i++) {
+				const character = characters[i];
+				const newCharacterDiv = document.createElement('div');
+				newCharacterDiv.classList.add('characters');
+				newCharacterDiv.innerHTML = `
+            <div class="top"></div>
+            <div class="bottom">
+                <span class="char-name">${character.name}</span>
+				<span class="char-attrib">${character.identity}</span>
+                <span class="char-attrib${character.school === '待补充' ? ' char-school-unknown' : ''}">${character.school}</span>
+                <br />
+                <small>${character.keyProfile}</small>
+            </div>
+        `;
+				container.appendChild(newCharacterDiv);
+			}
+		}
+	</script>
+
+</html>
