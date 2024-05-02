@@ -10,8 +10,12 @@
 			padding: 24px 48px;
 		}
 
+		small {
+			font-size: 12px;
+		}
+
 		nav {
-			padding: 10px 24px;
+			padding: 0 24px;
 			background-color: #fff;
 			box-shadow: 2px 2px 24px #888;
 			border-radius: 12px;
@@ -47,17 +51,24 @@
 		.chars {
 			padding: 24px 0;
 			display: grid;
-			grid-template-columns: repeat(auto-fill, 250px);
+			grid-template-columns: repeat(auto-fill, 200px);
 			grid-gap: 48px;
 		}
 
 		.characters {
-			width: 250px;
-			height: 250px;
+			user-select: none;
+			margin: 0;
+			width: 200px;
+			height: 200px;
 			background-color: #fff;
 			border-radius: 12px;
-			box-shadow: 2px 2px 24px #888888;
+			box-shadow: 2px 2px 12px #888888;
 			overflow: hidden;
+			transition: box-shadow 0.3s ease;
+		}
+
+		.characters:hover {
+			box-shadow: 4px 4px 24px #888888;
 		}
 
 		.top {
@@ -69,8 +80,11 @@
 		.bottom {
 			height: 50%;
 			width: 100%;
-			padding: 12px;
-			line-height: 1.8em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			gap: 12px;
 		}
 
 		.char-name {
@@ -79,15 +93,23 @@
 		}
 
 		.char-school-unknown {
-			background-color: #ccc !important;
+			color: #ccc !important;
+			border-color: #ccc !important;
 		}
 
 		.char-attrib {
-			font-size: 0.8em;
-			padding: 4px;
+			--scale: 0.9;
+			font-size: 12px;
+			transform: scale(var(--scale));
+			-ms-transform: scale(var(--scale));
+			-moz-transform: scale(var(--scale));
+			-webkit-transform: scale(var(--scale));
+			font-size: calc(var(--scale) * 12px);
+			padding: 3px 6px;
 			border-radius: 6px;
-			background-color: #a9d1ff;
-			margin: 0 4px;
+			color: #a9d1ff;
+			border: 1px solid #a9d1ff;
+			margin: 0 2px;
 		}
 	</style>
 </head>
@@ -114,10 +136,11 @@
             <div class="top"></div>
             <div class="bottom">
                 <span class="char-name">${character.name}</span>
-				<span class="char-attrib">${character.identity}</span>
-                <span class="char-attrib${character.school === '待补充' ? ' char-school-unknown' : ''}">${character.school}</span>
-                <br />
-                <small>${character.keyProfile}</small>
+				<div>
+					<span class="char-attrib">${character.identity}</span>
+                	<span class="char-attrib${character.school === '待补充' ? ' char-school-unknown' : ''}">${character.school}</span>
+				</div>
+                <small>“${character.keyProfile}”</small>
             </div>
         `;
 				container.appendChild(newCharacterDiv);
